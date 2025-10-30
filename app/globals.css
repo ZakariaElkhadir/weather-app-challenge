@@ -1,26 +1,185 @@
 @import "tailwindcss";
+/* Load DM Sans from Google for body text; use local Bricolage if available for headings
+*/
+/*
+  Style tokens and defaults based on style-guide.md
+  - Base font-size: 18px
+  - Colors: neutrals, orange, blue
+  - Fonts: DM Sans (body), Bricolage Grotesque (headings if available)
+*/
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+    /* Neutral palette (style-guide) */
+    --neutral-900: hsl(243, 96%, 9%);
+    --neutral-800: hsl(243, 27%, 20%);
+    --neutral-700: hsl(243, 23%, 24%);
+    --neutral-600: hsl(243, 23%, 30%);
+    --neutral-300: hsl(240, 6%, 70%);
+    --neutral-200: hsl(250, 6%, 84%);
+    --neutral-0: hsl(0, 0%, 100%);
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    /* Accent colors */
+    --orange-500: hsl(28, 100%, 52%);
+    --blue-500: hsl(233, 67%, 56%);
+    --blue-700: hsl(248, 70%, 36%);
+
+    /* Semantic tokens */
+    --color-background: var(--neutral-0);
+    --color-foreground: var(--neutral-900);
+    --color-muted: var(--neutral-600);
+    --color-border: var(--neutral-200);
+
+    /* Typography tokens */
+    --font-body:
+        "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+    --font-heading: "Bricolage Grotesque", var(--font-body);
+    --base-font-size: 18px;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --color-background: var(--neutral-900);
+        --color-foreground: var(--neutral-0);
+        --color-muted: var(--neutral-300);
+        --color-border: rgba(255, 255, 255, 0.06);
+    }
+}
+
+/* Base document styles */
+html,
+body {
+    height: 100%;
+}
+
+html {
+    font-size: var(--base-font-size);
+    /* 18px as requested in style-guide */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.4;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 0 0.5rem 0;
+    color: var(--color-foreground);
+    font-family: var(--font-heading);
+}
+
+/*h1 {
+  font-size: 2.25rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.125rem;
+}*/
+
+/* Utility: responsive container matching design widths */
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 375px;
+    /* mobile default (design) */
+}
+
+@media (min-width: 640px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1100px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1440px;
+    }
+}
+
+/* Forms & controls base styling */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Accessibility helper */
+.sr-only {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Small components defaults used in the app */
+.weather-app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 2rem 1rem;
+}
+
+.controls {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.attribution {
+    font-size: 11px;
+    text-align: center;
+}
+
+.attribution a {
+    color: var(--blue-500);
+}
+
+/* Borders and subtle separators */
+.divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 0.75rem 0;
+}
+
+/* Default stat card */
+.stat {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    padding: 0.75rem;
+    border-radius: 8px;
 }
