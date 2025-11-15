@@ -1,11 +1,38 @@
 @import "tailwindcss";
-/* Load DM Sans from Google for body text; use local Bricolage if available for headings
-*/
+
+/* Load local fonts */
+@font-face {
+    font-family: "DM Sans";
+    src: url("/assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf")
+        format("truetype");
+    font-weight: 100 1000;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "DM Sans";
+    src: url("/assets/fonts/DM_Sans/DMSans-Italic-VariableFont_opsz,wght.ttf")
+        format("truetype");
+    font-weight: 100 1000;
+    font-display: swap;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Bricolage Grotesque";
+    src: url("/assets/fonts/Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf")
+        format("truetype");
+    font-weight: 100 1000;
+    font-display: swap;
+    font-style: normal;
+}
+
 /*
   Style tokens and defaults based on style-guide.md
   - Base font-size: 18px
   - Colors: neutrals, orange, blue
-  - Fonts: DM Sans (body), Bricolage Grotesque (headings if available)
+  - Fonts: DM Sans (body), Bricolage Grotesque (headings)
 */
 
 :root {
