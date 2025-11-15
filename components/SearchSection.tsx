@@ -25,9 +25,9 @@ const SearchSection = ({ onSearch, isLoading }: searchSectionProps) => {
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center mt-6 sm:mt-10 gap-3 w-full max-w-3xl mb-14"
+        className="flex flex-col md:flex-row items-center mt-6 sm:mt-10 gap-3 w-full max-w-3xl mb-14"
       >
-        <div className="relative w-full">
+        <div className="relative w-full md:flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white" size={20} />
           <input
             className="bg-[var(--neutral-700)] rounded-lg pl-12 pr-4 py-3 text-white text-base w-full placeholder:text-[var(--neutral-400)]"
@@ -48,7 +48,7 @@ const SearchSection = ({ onSearch, isLoading }: searchSectionProps) => {
         </div>
         <button
           type="submit"
-          className="bg-[var(--blue-500)] rounded-lg px-6 py-3 text-white text-base font-medium disabled:opacity-50 hover:bg-[var(--blue-700)] transition-colors w-full"
+          className="bg-[var(--blue-500)] rounded-lg px-6 py-3 text-white text-base font-medium disabled:opacity-50 hover:bg-[var(--blue-700)] transition-colors w-full md:w-auto"
           disabled={isLoading}
         >
           {isLoading ? "Searching..." : "Search"}
