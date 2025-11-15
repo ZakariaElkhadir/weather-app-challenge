@@ -50,11 +50,11 @@
     --blue-500: hsl(233, 67%, 56%);
     --blue-700: hsl(248, 70%, 36%);
 
-    /* Semantic tokens */
-    --color-background: var(--neutral-0);
-    --color-foreground: var(--neutral-900);
-    --color-muted: var(--neutral-600);
-    --color-border: var(--neutral-200);
+    /* Semantic tokens - Force dark mode */
+    --color-background: var(--neutral-900);
+    --color-foreground: var(--neutral-0);
+    --color-muted: var(--neutral-300);
+    --color-border: rgba(255, 255, 255, 0.06);
 
     /* Typography tokens */
     --font-body:
@@ -62,15 +62,6 @@
         "Helvetica Neue", Arial, sans-serif;
     --font-heading: "Bricolage Grotesque", var(--font-body);
     --base-font-size: 18px;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-background: var(--neutral-900);
-        --color-foreground: var(--neutral-0);
-        --color-muted: var(--neutral-300);
-        --color-border: rgba(255, 255, 255, 0.06);
-    }
 }
 
 /* Base document styles */
@@ -82,6 +73,8 @@ body {
 html {
     font-size: var(--base-font-size);
     /* 18px as requested in style-guide */
+    background: var(--neutral-900);
+    color-scheme: dark;
 }
 
 body {
