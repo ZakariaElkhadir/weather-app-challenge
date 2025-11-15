@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import ErrorState from "./ErrorState";
 import LoadingSkeleton from "./LoadingSkeleton";
 import { ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface WeatherData {
   temperature: number;
@@ -65,6 +66,8 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
     selectedDay && data?.hourlyByDay?.[selectedDay] ? data.hourlyByDay[selectedDay] : [];
 
   const tempUnit = unit === "metric" ? "°C" : "°F";
+  const windSpeedUnit = unit === "metric" ? "km/h" : "mph";
+  const precipitationUnit = unit === "metric" ? "mm" : "in";
 
   if (!data && !error && !location) {
     return (
@@ -146,7 +149,12 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
       {/* Left side: Main weather card + 4 detail cards */}
       <div className="lg:col-span-2 space-y-4">
         {/* Main Weather Card */}
-        <div className="bg-[url('/assets/images/bg-today-large.svg')] bg-cover bg-center bg-no-repeat p-6 md:p-8 rounded-lg">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-[url('/assets/images/bg-today-large.svg')] bg-cover bg-center bg-no-repeat p-6 md:p-8 rounded-lg"
+        >
           {/* Mobile: Vertical Layout */}
           <div className="flex flex-col items-center text-center lg:hidden">
             <h3 className="text-2xl font-bold text-(--neutral-0) mb-1">
@@ -186,46 +194,114 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
               <p className="text-6xl font-bold">{data?.temperature}°</p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* 4 Weather Detail Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.1,
+              },
+            },
+          }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4"
+        >
           {/* Feels Like Card */}
-          <div className="bg-(--neutral-800) rounded-lg p-6">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, scale: 0.9, y: 20 },
+              visible: { opacity: 1, scale: 1, y: 0 },
+            }}
+            transition={{ duration: 0.4 }}
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-(--neutral-800) rounded-lg p-6"
+          >
             <p className="text-(--neutral-300) text-sm mb-2">Feels Like</p>
             <p className="text-(--neutral-0) text-3xl font-bold">{data?.temperature}°</p>
-          </div>
+          </motion.div>
 
           {/* Humidity Card */}
-          <div className="bg-(--neutral-800) rounded-lg p-6">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, scale: 0.9, y: 20 },
+              visible: { opacity: 1, scale: 1, y: 0 },
+            }}
+            transition={{ duration: 0.4 }}
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-(--neutral-800) rounded-lg p-6"
+          >
             <p className="text-(--neutral-300) text-sm mb-2">Humidity</p>
             <p className="text-(--neutral-0) text-3xl font-bold">{data?.humidity}%</p>
-          </div>
+          </motion.div>
 
           {/* Wind Card */}
-          <div className="bg-(--neutral-800) rounded-lg p-6">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, scale: 0.9, y: 20 },
+              visible: { opacity: 1, scale: 1, y: 0 },
+            }}
+            transition={{ duration: 0.4 }}
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-(--neutral-800) rounded-lg p-6"
+          >
             <p className="text-(--neutral-300) text-sm mb-2">Wind</p>
             <p className="text-(--neutral-0) text-3xl font-bold">
-              {data?.windSpeed}
-              mph
+              {data?.windSpeed} {windSpeedUnit}
             </p>
-          </div>
+          </motion.div>
 
           {/* Precipitation Card */}
-          <div className="bg-(--neutral-800) rounded-lg p-6">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, scale: 0.9, y: 20 },
+              visible: { opacity: 1, scale: 1, y: 0 },
+            }}
+            transition={{ duration: 0.4 }}
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-(--neutral-800) rounded-lg p-6"
+          >
             <p className="text-(--neutral-300) text-sm mb-2">Precipitation</p>
-            <p className="text-(--neutral-0) text-3xl font-bold">{data?.precipitation} in</p>
-          </div>
-        </div>
+            <p className="text-(--neutral-0) text-3xl font-bold">
+              {data?.precipitation} {precipitationUnit}
+            </p>
+          </motion.div>
+        </motion.div>
         {/* Daily Forecast Section */}
         <div className="space-y-4 w-full">
-          <h3 className="text-xl font-semibold text-(--neutral-0)">Daily forecast</h3>
+          <motion.h3
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+            className="text-xl font-semibold text-(--neutral-0)"
+          >
+            Daily forecast
+          </motion.h3>
 
           {/* Mobile: Grid Layout */}
-          <div className="grid grid-cols-3 gap-3 md:hidden">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: {
+                transition: {
+                  staggerChildren: 0.08,
+                },
+              },
+            }}
+            className="grid grid-cols-3 gap-3 md:hidden"
+          >
             {data?.daily?.map((day, index) => (
-              <div
+              <motion.div
                 key={index}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.8, y: 20 },
+                  visible: { opacity: 1, scale: 1, y: 0 },
+                }}
+                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.05, y: -3 }}
                 className="bg-(--neutral-800) rounded-lg p-3 flex flex-col items-center gap-2"
               >
                 {/* Day name */}
@@ -247,15 +323,32 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
                   <span className="text-(--neutral-0) font-bold">{day.highTemp}°</span>
                   <span className="text-(--neutral-300)">{day.lowTemp}°</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Desktop: Horizontal Scroll */}
-          <div className="hidden md:flex overflow-x-auto gap-4 pb-4 scrollbar-hide w-full">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: {
+                transition: {
+                  staggerChildren: 0.08,
+                },
+              },
+            }}
+            className="hidden md:flex overflow-x-auto gap-4 pb-4 scrollbar-hide w-full"
+          >
             {data?.daily?.map((day, index) => (
-              <div
+              <motion.div
                 key={index}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.8, x: -20 },
+                  visible: { opacity: 1, scale: 1, x: 0 },
+                }}
+                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.05, y: -5 }}
                 className="bg-(--neutral-800) rounded-lg p-4 min-w-[120px] flex flex-col items-center gap-3"
               >
                 {/* Day name */}
@@ -275,14 +368,19 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
                   <span className="text-(--neutral-0) font-bold">{day.highTemp}°</span>
                   <span className="text-(--neutral-300)">{day.lowTemp}°</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Right side: Hourly Forecast */}
-      <div className="lg:col-span-1 bg-(--neutral-800) rounded-lg p-4">
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="lg:col-span-1 bg-(--neutral-800) rounded-lg p-4"
+      >
         {/* Day selector and Hourly forecast - Flex Header */}
         <div className="flex items-center justify-between mb-4 relative" ref={dropdownRef}>
           <h3 className="text-(--neutral-0) text-base font-bold">Hourly forecast</h3>
@@ -321,11 +419,28 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
 
         {/* Hourly forecast cards for selected day */}
         {hourlyForecast.length > 0 ? (
-          hourlyForecast.map((hourlyData, index) => (
-            <div
-              key={index}
-              className="bg-(--neutral-700) rounded-lg flex justify-between items-center mb-2 px-3 py-2.5"
-            >
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: {
+                transition: {
+                  staggerChildren: 0.05,
+                },
+              },
+            }}
+          >
+            {hourlyForecast.map((hourlyData, index) => (
+              <motion.div
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  visible: { opacity: 1, x: 0 },
+                }}
+                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.02, x: 5 }}
+                className="bg-(--neutral-700) rounded-lg flex justify-between items-center mb-2 px-3 py-2.5"
+              >
               <div className="flex items-center gap-3">
                 <Image
                   src={getWeatherIcon(hourlyData.condition)}
@@ -342,12 +457,13 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
                 {hourlyData.temperature}
                 {tempUnit}
               </p>
-            </div>
-          ))
+              </motion.div>
+            ))}
+          </motion.div>
         ) : (
           <p className="text-(--neutral-300) text-center py-3 text-sm">No hourly data available</p>
         )}
-      </div>
+      </motion.div>
     </section>
   );
 };
