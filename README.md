@@ -1,103 +1,300 @@
-# Frontend Mentor - Weather app
+# Weather App - Frontend Mentor Challenge
 
-![Design preview for the Weather app coding challenge](./preview.jpg)
+![Weather App Preview](./preview.jpg)
 
-## Welcome! 👋
+A modern, responsive weather application built with Next.js 15, TypeScript, and the Open-Meteo API. This project is a solution to the [Frontend Mentor Weather App Challenge](https://www.frontendmentor.io).
 
-Thanks for checking out this coding challenge.
+## 🌟 Features
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
+### Core Functionality
+- 🔍 **Location Search** - Search for weather information by city name
+- 🌡️ **Current Weather** - View real-time temperature, conditions, and location details
+- 📊 **Weather Metrics** - Display feels-like temperature, humidity, wind speed, and precipitation
+- 📅 **7-Day Forecast** - Browse daily forecasts with high/low temperatures and weather icons
+- ⏰ **Hourly Forecast** - View hourly temperature changes throughout the day
+- 📆 **Day Selector** - Switch between different days to see specific hourly forecasts
+- 🔄 **Unit Toggle** - Switch between Imperial (°F, mph, in) and Metric (°C, km/h, mm) units
+- 📱 **Fully Responsive** - Optimized layouts for mobile, tablet, and desktop devices
+- ⚡ **Loading States** - Elegant loading skeleton with animated indicators
+- ❌ **Error Handling** - User-friendly error messages with retry functionality
 
-**To do this challenge, you need a good understanding of HTML, CSS, and JavaScript.**
+### User Experience
+- ✨ Smooth animations and transitions
+- 🎯 Interactive hover and focus states
+- 🎨 Modern, clean UI design
+- 🌙 Dark theme with carefully chosen color palette
+- 🖱️ Custom dropdown menus with outside-click detection
+- 🔔 "Search in progress" indicator during API calls
 
-## The challenge
+## 🛠️ Tech Stack
 
-Build a weather app using the [Open-Meteo API](https://open-meteo.com/) and get it looking as close to the design as possible.
+- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **API:** [Open-Meteo Weather API](https://open-meteo.com/)
+- **Geocoding:** [Open-Meteo Geocoding API](https://open-meteo.com/en/docs/geocoding-api)
 
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
+## 🚀 Getting Started
 
-Your users should be able to:
+### Prerequisites
 
-- Search for weather information by entering a location in the search bar
-- View current weather conditions including temperature, weather icon, and location details
-- See additional weather metrics like "feels like" temperature, humidity percentage, wind speed, and precipitation amounts
-- Browse a 7-day weather forecast with daily high/low temperatures and weather icons
-- View an hourly forecast showing temperature changes throughout the day
-- Switch between different days of the week using the day selector in the hourly forecast section
-- Toggle between Imperial and Metric measurement units via the units dropdown
-- View the optimal layout for the interface depending on their device's screen size
-- See hover and focus states for all interactive elements on the page
+- Node.js 18+ and npm/yarn/pnpm installed
+- Git for version control
 
-## Getting started
+### Installation
 
-### What's included
+1. **Clone the repository**
+```bash
+git clone https://github.com/yourusername/weather-app-challenge.git
+cd weather-app-challenge
+```
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design.
+2. **Install dependencies**
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
 
-**In your download:**
-- Mobile and desktop designs (JPG format)
-- All required assets in the `/assets` folder
-- Variable and static font files (or link to Google Fonts)
-- `style-guide.md` with colors, fonts, and other design specs
+3. **Set up environment variables**
+```bash
+cp .env.example .env.local
+```
 
-**Want more accurate builds?** The designs are in JPG static format, which means you'll need to use your best judgment for styles such as `font-size`, `padding`, and `margin`. If you'd like the Figma design file to help build a more accurate solution faster, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+No API key is required! Open-Meteo is free and open-source.
 
-### API setup
+4. **Run the development server**
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-This project uses the [Open-Meteo API](https://open-meteo.com/) to fetch weather data.
+5. **Open your browser**
 
-**Good news:** Open-Meteo is completely free and doesn't require an API key! You can start making requests right away.
+Navigate to [http://localhost:3000](http://localhost:3000)
 
-- **API Documentation:** [https://open-meteo.com/en/docs](https://open-meteo.com/en/docs)
-- **No rate limits** for reasonable personal use
-- Example endpoint: `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true`
+## 📁 Project Structure
 
-Check their documentation for all available weather parameters and location search capabilities.
+```
+weather-app-challenge/
+├── app/
+│   ├── api/
+│   │   └── weather/
+│   │       ├── route.ts          # Weather API endpoint
+│   │       └── test/
+│   │           └── route.ts      # Test API endpoint
+│   ├── globals.css               # Global styles & CSS variables
+│   ├── layout.tsx                # Root layout
+│   └── page.tsx                  # Home page
+├── components/
+│   ├── ErrorState.tsx            # Error UI component
+│   ├── Footer.tsx                # Footer with attribution
+│   ├── Header.tsx                # Header with unit selector
+│   ├── LoadingSkeleton.tsx       # Loading skeleton UI
+│   ├── SearchSection.tsx         # Search input and button
+│   └── WeatherDataSection.tsx    # Main weather display
+├── public/
+│   └── assets/
+│       └── images/               # Weather icons & backgrounds
+├── .env.example                  # Environment variables template
+└── README.md                     # This file
+```
 
-## Building your project
+## 🎨 Design Features
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+### Responsive Breakpoints
+- **Mobile:** < 768px (single column, grid layouts)
+- **Tablet:** 768px - 1024px (optimized spacing)
+- **Desktop:** > 1024px (multi-column layout)
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+### Color Palette
+```css
+/* Primary Colors */
+--neutral-900: #1A202C
+--neutral-800: #2D3748
+--neutral-700: #4A5568
+--neutral-600: #718096
+--neutral-300: #CBD5E0
+--neutral-0: #FFFFFF
 
-**Need help?** [Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
+/* Accent Colors */
+--blue-500: #4299E1
+--blue-700: #2B6CB0
+--orange-500: #ED8936
+```
 
-## Deploying your project
+### Typography
+- **Font Family:** Inter (sans-serif)
+- **Font Weights:** 400 (Regular), 500 (Medium), 600 (Semi-bold), 700 (Bold)
 
-As mentioned above, there are many ways to host your project for free. Our recommended hosts are:
+## 🌐 API Integration
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
+This project uses two Open-Meteo API endpoints:
+
+### 1. Geocoding API
+Converts city names to coordinates:
+```
+https://geocoding-api.open-meteo.com/v1/search?name={city}&count=1
+```
+
+### 2. Weather Forecast API
+Fetches weather data using coordinates:
+```
+https://api.open-meteo.com/v1/forecast?
+  latitude={lat}&longitude={lon}&
+  current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,precipitation&
+  hourly=temperature_2m,weather_code&
+  daily=weather_code,temperature_2m_max,temperature_2m_min&
+  temperature_unit={celsius|fahrenheit}&
+  wind_speed_unit={kmh|mph}&
+  precipitation_unit={mm|inch}
+```
+
+## 🔧 Available Scripts
+
+```bash
+# Development server with hot reload
+npm run dev
+
+# Production build
+npm run build
+
+# Start production server
+npm run start
+
+# Run linter
+npm run lint
+```
+
+## 📦 Build & Deployment
+
+### Build for Production
+```bash
+npm run build
+```
+
+### Deploy to Vercel (Recommended)
+1. Push your code to GitHub
+2. Import your repository on [Vercel](https://vercel.com)
+3. Deploy with one click!
+
+### Other Deployment Options
 - [Netlify](https://www.netlify.com/)
+- [GitHub Pages](https://pages.github.com/)
+- [Railway](https://railway.app/)
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://medium.com/frontend-mentor/frontend-mentor-trusted-hosting-providers-bf000dfebe).
+## ✨ Key Features Implementation
 
-## Submitting your solution
+### Custom Dropdown Component
+- Built from scratch without native `<select>`
+- Click-outside detection to close
+- Smooth rotation animation on chevron icon
+- 90% width items with rounded corners for better visual spacing
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://medium.com/frontend-mentor/a-complete-guide-to-submitting-solutions-on-frontend-mentor-ac6384162248) for tips on how to do this.
+### Loading States
+- Animated bouncing dots indicator
+- Skeleton screens matching actual content layout
+- Responsive grid/horizontal layouts
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+### Error Handling
+- Network error detection
+- User-friendly error messages
+- Retry functionality
+- Graceful fallbacks
 
-**We strongly recommend overwriting this `README.md` with a custom one.** We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code. The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings.
+### Responsive Design
+- Mobile-first approach
+- Vertical card layout on mobile
+- Grid layout for daily forecast on mobile (3 columns)
+- Horizontal scrolling daily forecast on desktop
+- Flexible hourly forecast with custom dropdown
 
-## Sharing your solution
+## 🎯 Challenges & Solutions
 
-There are multiple places you can share your solution:
+### Challenge 1: Responsive Daily Forecast
+**Problem:** Need different layouts for mobile (grid) vs desktop (horizontal scroll)
 
-1. Submit it on the platform and share your solution page in the **#finished-projects** channel of our [community](https://www.frontendmentor.io/community)
-2. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on other social channels like LinkedIn.
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
+**Solution:** Use Tailwind's responsive utilities with `hidden` and `grid`/`flex` combinations:
+```tsx
+{/* Mobile: Grid */}
+<div className="grid grid-cols-3 gap-3 md:hidden">
 
-## Got feedback for us?
+{/* Desktop: Horizontal Scroll */}
+<div className="hidden md:flex overflow-x-auto gap-4">
+```
 
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
+### Challenge 2: Custom Dropdown with Outside Click
+**Problem:** Native `<select>` doesn't match design requirements
 
-**This challenge is completely free. Please share it with anyone who will find it useful for practice.**
+**Solution:** Built custom dropdown with `useRef` and `useEffect` for outside-click detection:
+```tsx
+useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsDropdownOpen(false);
+    }
+  };
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
+```
+
+### Challenge 3: Weather Icon Mapping
+**Problem:** Open-Meteo uses weather codes (0-99) but we have specific icon files
+
+**Solution:** Created `getWeatherIcon()` function with condition string matching logic
+
+## 📝 What I Learned
+
+- Advanced Next.js 15 App Router patterns
+- TypeScript type safety for API responses
+- Responsive design with mobile-first approach
+- Custom component development (dropdowns, skeletons)
+- API integration and error handling
+- CSS variable management for theming
+- Click-outside detection patterns
+- Tailwind CSS utility-first approach
+
+## 🔮 Future Enhancements
+
+- [ ] Add geolocation support (auto-detect user location)
+- [ ] Implement weather alerts/warnings
+- [ ] Add multiple location favorites
+- [ ] Dark/light theme toggle
+- [ ] PWA support with offline caching
+- [ ] Animation for weather condition changes
+- [ ] More detailed weather metrics (UV index, visibility, air quality)
+- [ ] Weather charts and graphs
+- [ ] Unit tests with Jest/React Testing Library
+- [ ] E2E tests with Playwright
+
+## 👤 Author
+
+**Zakaria Elkhadir**
+
+- GitHub: [@yourusername](https://github.com/yourusername)
+- Frontend Mentor: [@yourusername](https://www.frontendmentor.io/profile/yourusername)
+- Twitter: [@yourhandle](https://twitter.com/yourhandle)
+
+## 🙏 Acknowledgments
+
+- Challenge by [Frontend Mentor](https://www.frontendmentor.io)
+- Weather data provided by [Open-Meteo](https://open-meteo.com/)
+- Icons by [Lucide](https://lucide.dev/)
+- Fonts by [Google Fonts](https://fonts.google.com/)
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+**Challenge completed!** ✅ Feel free to explore the code, provide feedback, or use it as a reference for your own projects.
 
 **Have fun building!** 🚀
