@@ -278,9 +278,9 @@ useEffect(() => {
 
 **Zakaria Elkhadir**
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Frontend Mentor: [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter: [@yourhandle](https://twitter.com/yourhandle)
+- GitHub: [@ZakariaElkhadir](https://github.com/ZakariaElkhadir)
+- Frontend Mentor: [@ZakariaElkhadir](https://www.frontendmentor.io/profile/ZakariaElkhadir)
+- Twitter: [@ZakariaElkhadi5]((https://twitter.com/ZakariaElkhadi5))
 
 ## 🙏 Acknowledgments
 
