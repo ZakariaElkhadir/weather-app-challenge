@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import ErrorState from "./ErrorState";
 import LoadingSkeleton from "./LoadingSkeleton";
 import { ChevronDown } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface WeatherData {
   temperature: number;
@@ -150,10 +150,11 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
       <div className="lg:col-span-2 space-y-4">
         {/* Main Weather Card */}
         <motion.div
+          layout
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-[url('/assets/images/bg-today-large.svg')] bg-cover bg-center bg-no-repeat p-6 md:p-8 rounded-lg"
+          className="bg-[url('/assets/images/bg-today-large.svg')] bg-cover bg-center bg-no-repeat p-6 md:p-8 rounded-lg shadow-lg"
         >
           {/* Mobile: Vertical Layout */}
           <div className="flex flex-col items-center text-center lg:hidden">
@@ -198,6 +199,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
 
         {/* 4 Weather Detail Cards */}
         <motion.div
+          layout
           initial="hidden"
           animate="visible"
           variants={{
@@ -217,7 +219,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
             }}
             transition={{ duration: 0.4 }}
             whileHover={{ scale: 1.05, y: -5 }}
-            className="bg-(--neutral-800) rounded-lg p-6"
+            className="bg-(--neutral-800) rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow"
           >
             <p className="text-(--neutral-300) text-sm mb-2">Feels Like</p>
             <p className="text-(--neutral-0) text-3xl font-bold">{data?.temperature}°</p>
@@ -231,7 +233,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
             }}
             transition={{ duration: 0.4 }}
             whileHover={{ scale: 1.05, y: -5 }}
-            className="bg-(--neutral-800) rounded-lg p-6"
+            className="bg-(--neutral-800) rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow"
           >
             <p className="text-(--neutral-300) text-sm mb-2">Humidity</p>
             <p className="text-(--neutral-0) text-3xl font-bold">{data?.humidity}%</p>
@@ -245,7 +247,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
             }}
             transition={{ duration: 0.4 }}
             whileHover={{ scale: 1.05, y: -5 }}
-            className="bg-(--neutral-800) rounded-lg p-6"
+            className="bg-(--neutral-800) rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow"
           >
             <p className="text-(--neutral-300) text-sm mb-2">Wind</p>
             <p className="text-(--neutral-0) text-3xl font-bold">
@@ -261,7 +263,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
             }}
             transition={{ duration: 0.4 }}
             whileHover={{ scale: 1.05, y: -5 }}
-            className="bg-(--neutral-800) rounded-lg p-6"
+            className="bg-(--neutral-800) rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow"
           >
             <p className="text-(--neutral-300) text-sm mb-2">Precipitation</p>
             <p className="text-(--neutral-0) text-3xl font-bold">
@@ -282,6 +284,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
 
           {/* Mobile: Grid Layout */}
           <motion.div
+            layout
             initial="hidden"
             animate="visible"
             variants={{
@@ -302,7 +305,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
                 }}
                 transition={{ duration: 0.3 }}
                 whileHover={{ scale: 1.05, y: -3 }}
-                className="bg-(--neutral-800) rounded-lg p-3 flex flex-col items-center gap-2"
+                className="bg-(--neutral-800) rounded-lg p-3 flex flex-col items-center gap-2 shadow-sm"
               >
                 {/* Day name */}
                 <p className="text-(--neutral-300) text-xs font-medium">
@@ -329,6 +332,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
 
           {/* Desktop: Horizontal Scroll */}
           <motion.div
+            layout
             initial="hidden"
             animate="visible"
             variants={{
@@ -349,7 +353,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
                 }}
                 transition={{ duration: 0.3 }}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-(--neutral-800) rounded-lg p-4 min-w-[120px] flex flex-col items-center gap-3"
+                className="bg-(--neutral-800) rounded-lg p-4 min-w-[120px] flex flex-col items-center gap-3 shadow-md hover:shadow-lg transition-shadow"
               >
                 {/* Day name */}
                 <p className="text-(--neutral-300) text-sm font-medium">{day.dayName}</p>
@@ -376,10 +380,11 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
 
       {/* Right side: Hourly Forecast */}
       <motion.div
+        layout
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="lg:col-span-1 bg-(--neutral-800) rounded-lg p-4"
+        className="lg:col-span-1 bg-(--neutral-800) rounded-lg p-4 shadow-lg"
       >
         {/* Day selector and Hourly forecast - Flex Header */}
         <div className="flex items-center justify-between mb-4 relative" ref={dropdownRef}>
@@ -398,30 +403,39 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
           </button>
 
           {/* Dropdown Menu Popup */}
-          {isDropdownOpen && (
-            <div className="absolute top-full right-0 mt-2 bg-(--neutral-700) rounded-lg shadow-lg z-10 min-w-[140px] py-2 px-2">
-              {data?.daily?.map((day, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleDaySelect(day.dayName)}
-                  className={`w-[90%] mx-auto block text-left px-4 py-2 text-sm transition-colors rounded-lg ${
-                    selectedDay === day.dayName
+          <AnimatePresence>
+            {isDropdownOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute top-full right-0 mt-2 bg-(--neutral-700) rounded-lg shadow-lg z-10 min-w-[140px] py-2 px-2"
+              >
+                {data?.daily?.map((day, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleDaySelect(day.dayName)}
+                    className={`w-[90%] mx-auto block text-left px-4 py-2 text-sm transition-colors rounded-lg ${selectedDay === day.dayName
                       ? "bg-(--neutral-600) text-(--neutral-0) font-medium"
                       : "text-(--neutral-300) hover:bg-(--neutral-600) hover:text-(--neutral-0)"
-                  }`}
-                >
-                  {day.dayName}
-                </button>
-              ))}
-            </div>
-          )}
+                      }`}
+                  >
+                    {day.dayName}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Hourly forecast cards for selected day */}
         {hourlyForecast.length > 0 ? (
           <motion.div
+            layout
             initial="hidden"
             animate="visible"
+            key={selectedDay} // Force re-render animation on day change
             variants={{
               visible: {
                 transition: {
@@ -432,31 +446,31 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
           >
             {hourlyForecast.map((hourlyData, index) => (
               <motion.div
-                key={index}
+                key={`${selectedDay}-${index}`}
                 variants={{
                   hidden: { opacity: 0, x: -20 },
                   visible: { opacity: 1, x: 0 },
                 }}
                 transition={{ duration: 0.3 }}
                 whileHover={{ scale: 1.02, x: 5 }}
-                className="bg-(--neutral-700) rounded-lg flex justify-between items-center mb-2 px-3 py-2.5"
+                className="bg-(--neutral-700) rounded-lg flex justify-between items-center mb-2 px-3 py-2.5 shadow-sm hover:shadow-md transition-shadow"
               >
-              <div className="flex items-center gap-3">
-                <Image
-                  src={getWeatherIcon(hourlyData.condition)}
-                  alt={hourlyData.condition || "weather icon"}
-                  width={40}
-                  height={40}
-                  className="w-10 h-10"
-                />
-                <p className="text-base font-medium text-(--neutral-0)">
-                  {formatTime(hourlyData.dt)}
+                <div className="flex items-center gap-3">
+                  <Image
+                    src={getWeatherIcon(hourlyData.condition)}
+                    alt={hourlyData.condition || "weather icon"}
+                    width={40}
+                    height={40}
+                    className="w-10 h-10"
+                  />
+                  <p className="text-base font-medium text-(--neutral-0)">
+                    {formatTime(hourlyData.dt)}
+                  </p>
+                </div>
+                <p className="text-(--neutral-0) text-base font-medium">
+                  {hourlyData.temperature}
+                  {tempUnit}
                 </p>
-              </div>
-              <p className="text-(--neutral-0) text-base font-medium">
-                {hourlyData.temperature}
-                {tempUnit}
-              </p>
               </motion.div>
             ))}
           </motion.div>
