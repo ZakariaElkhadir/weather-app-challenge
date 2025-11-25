@@ -154,7 +154,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-[url('/assets/images/bg-today-large.svg')] bg-cover bg-center bg-no-repeat p-6 md:p-8 rounded-lg shadow-lg"
+          className="bg-[url('/assets/images/bg-today-large.svg')] bg-cover bg-center bg-no-repeat p-6 md:p-8 rounded-lg shadow-xl border border-white/10"
         >
           {/* Mobile: Vertical Layout */}
           <div className="flex flex-col items-center text-center lg:hidden">
@@ -219,7 +219,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
             }}
             transition={{ duration: 0.4 }}
             whileHover={{ scale: 1.05, y: -5 }}
-            className="bg-(--neutral-800) rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow"
+            className="bg-(--neutral-800)/50 backdrop-blur-md border border-(--neutral-700)/30 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all"
           >
             <p className="text-(--neutral-300) text-sm mb-2">Feels Like</p>
             <p className="text-(--neutral-0) text-3xl font-bold">{data?.temperature}°</p>
@@ -233,7 +233,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
             }}
             transition={{ duration: 0.4 }}
             whileHover={{ scale: 1.05, y: -5 }}
-            className="bg-(--neutral-800) rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow"
+            className="bg-(--neutral-800)/50 backdrop-blur-md border border-(--neutral-700)/30 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all"
           >
             <p className="text-(--neutral-300) text-sm mb-2">Humidity</p>
             <p className="text-(--neutral-0) text-3xl font-bold">{data?.humidity}%</p>
@@ -247,7 +247,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
             }}
             transition={{ duration: 0.4 }}
             whileHover={{ scale: 1.05, y: -5 }}
-            className="bg-(--neutral-800) rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow"
+            className="bg-(--neutral-800)/50 backdrop-blur-md border border-(--neutral-700)/30 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all"
           >
             <p className="text-(--neutral-300) text-sm mb-2">Wind</p>
             <p className="text-(--neutral-0) text-3xl font-bold">
@@ -263,7 +263,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
             }}
             transition={{ duration: 0.4 }}
             whileHover={{ scale: 1.05, y: -5 }}
-            className="bg-(--neutral-800) rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow"
+            className="bg-(--neutral-800)/50 backdrop-blur-md border border-(--neutral-700)/30 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all"
           >
             <p className="text-(--neutral-300) text-sm mb-2">Precipitation</p>
             <p className="text-(--neutral-0) text-3xl font-bold">
@@ -305,7 +305,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
                 }}
                 transition={{ duration: 0.3 }}
                 whileHover={{ scale: 1.05, y: -3 }}
-                className="bg-(--neutral-800) rounded-lg p-3 flex flex-col items-center gap-2 shadow-sm"
+                className="bg-(--neutral-800)/50 backdrop-blur-md border border-(--neutral-700)/30 rounded-lg p-3 flex flex-col items-center gap-2 shadow-sm"
               >
                 {/* Day name */}
                 <p className="text-(--neutral-300) text-xs font-medium">
@@ -353,7 +353,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
                 }}
                 transition={{ duration: 0.3 }}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-(--neutral-800) rounded-lg p-4 min-w-[120px] flex flex-col items-center gap-3 shadow-md hover:shadow-lg transition-shadow"
+                className="bg-(--neutral-800)/50 backdrop-blur-md border border-(--neutral-700)/30 rounded-lg p-4 min-w-[120px] flex flex-col items-center gap-3 shadow-lg hover:shadow-xl transition-all"
               >
                 {/* Day name */}
                 <p className="text-(--neutral-300) text-sm font-medium">{day.dayName}</p>
@@ -384,7 +384,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="lg:col-span-1 bg-(--neutral-800) rounded-lg p-4 shadow-lg"
+        className="lg:col-span-1 bg-(--neutral-800)/50 backdrop-blur-md border border-(--neutral-700)/30 rounded-lg p-4 shadow-xl"
       >
         {/* Day selector and Hourly forecast - Flex Header */}
         <div className="flex items-center justify-between mb-4 relative" ref={dropdownRef}>
@@ -393,7 +393,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
           {/* Custom Dropdown Button */}
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="bg-(--neutral-700) text-(--neutral-0) rounded-lg px-3 py-1.5 text-sm cursor-pointer hover:bg-(--neutral-600) transition-colors flex items-center gap-2"
+            className="bg-(--neutral-700)/50 backdrop-blur-sm border border-(--neutral-600)/30 text-(--neutral-0) rounded-lg px-3 py-1.5 text-sm cursor-pointer hover:bg-(--neutral-600)/50 transition-colors flex items-center gap-2"
           >
             <span>{selectedDay}</span>
             <ChevronDown
@@ -410,15 +410,15 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-full right-0 mt-2 bg-(--neutral-700) rounded-lg shadow-lg z-10 min-w-[140px] py-2 px-2"
+                className="absolute top-full right-0 mt-2 bg-(--neutral-700)/90 backdrop-blur-md border border-(--neutral-600)/50 rounded-lg shadow-xl z-10 min-w-[140px] py-2 px-2"
               >
                 {data?.daily?.map((day, index) => (
                   <button
                     key={index}
                     onClick={() => handleDaySelect(day.dayName)}
                     className={`w-[90%] mx-auto block text-left px-4 py-2 text-sm transition-colors rounded-lg ${selectedDay === day.dayName
-                      ? "bg-(--neutral-600) text-(--neutral-0) font-medium"
-                      : "text-(--neutral-300) hover:bg-(--neutral-600) hover:text-(--neutral-0)"
+                        ? "bg-(--neutral-600) text-(--neutral-0) font-medium"
+                        : "text-(--neutral-300) hover:bg-(--neutral-600)/50 hover:text-(--neutral-0)"
                       }`}
                   >
                     {day.dayName}
@@ -453,7 +453,7 @@ const WeatherDataSection = ({ data, location, error, unit, onRetry }: WeatherDat
                 }}
                 transition={{ duration: 0.3 }}
                 whileHover={{ scale: 1.02, x: 5 }}
-                className="bg-(--neutral-700) rounded-lg flex justify-between items-center mb-2 px-3 py-2.5 shadow-sm hover:shadow-md transition-shadow"
+                className="bg-(--neutral-700)/30 backdrop-blur-sm border border-(--neutral-600)/20 rounded-lg flex justify-between items-center mb-2 px-3 py-2.5 shadow-sm hover:shadow-md transition-all"
               >
                 <div className="flex items-center gap-3">
                   <Image
